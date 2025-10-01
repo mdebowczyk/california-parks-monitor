@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  park-monitor:
+    build: .
+    container_name: california-parks-monitor
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/app/config.yaml
+      - ./logs:/app/logs
+    environment:
+      - TZ=America/Los_Angeles
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

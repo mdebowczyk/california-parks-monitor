@@ -1,0 +1,86 @@
+# California National Parks Availability Monitor Configuration
+
+# Parks to monitor (all use Recreation.gov)
+parks:
+  - name: "Yosemite National Park"
+    park_id: "2991"
+    check_camping: true
+    check_permits: true
+    
+  - name: "Sequoia & Kings Canyon National Parks"
+    park_id: "2931"
+    check_camping: true
+    check_permits: true
+    
+  - name: "Joshua Tree National Park"
+    park_id: "2782"
+    check_camping: true
+    check_permits: false
+    
+  - name: "Death Valley National Park"
+    park_id: "2658"
+    check_camping: true
+    check_permits: false
+    
+  - name: "Channel Islands National Park"
+    park_id: "2609"
+    check_camping: true
+    check_permits: true
+    
+  - name: "Redwood National and State Parks"
+    park_id: "2907"
+    check_camping: true
+    check_permits: false
+    
+  - name: "Lassen Volcanic National Park"
+    park_id: "2803"
+    check_camping: true
+    check_permits: false
+    
+  - name: "Pinnacles National Park"
+    park_id: "2893"
+    check_camping: true
+    check_permits: false
+
+# Target dates for June 2026
+target_dates:
+  start_date: "2026-06-01"
+  end_date: "2026-06-30"
+
+# Notification settings
+notifications:
+  # Email notifications (requires SMTP configuration)
+  email:
+    enabled: true
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    sender_email: "your-email@gmail.com"
+    sender_password: "your-app-password"  # Use app-specific password
+    recipient_emails:
+      - "your-email@gmail.com"
+    
+  # Webhook notifications (e.g., Slack, Discord, custom endpoint)
+  webhook:
+    enabled: false
+    url: "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+    
+  # SMS notifications (requires Twilio account)
+  sms:
+    enabled: false
+    twilio_account_sid: "your-account-sid"
+    twilio_auth_token: "your-auth-token"
+    twilio_phone_number: "+1234567890"
+    recipient_phone_numbers:
+      - "+1234567890"
+
+# Monitoring settings
+monitoring:
+  check_interval_minutes: 60  # How often to check for availability
+  max_retries: 3  # Number of retries on failure
+  retry_delay_seconds: 30  # Delay between retries
+  
+# Logging settings
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_file: "availability_monitor.log"
+  console_output: true
